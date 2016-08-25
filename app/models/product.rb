@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   end
 
   def self.text_search_query
-    '(products.name COLLATE UTF8_GENERAL_CI like(:word))'
+    '(products.name COLLATE UTF8_GENERAL_CI like(:word)
+    OR products.description COLLATE UTF8_GENERAL_CI like(:word))'
   end
 end
