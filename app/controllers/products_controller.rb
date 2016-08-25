@@ -21,6 +21,13 @@ class ProductsController < ApplicationController
   def edit
   end
 
+  def search
+    sort_order = "products.name ASC"
+
+    @products = Product.search(params[:q]).order(sort_order).limit(10)
+    render json: @products
+  end
+
   # POST /products
   # POST /products.json
   def create

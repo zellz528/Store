@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'store#index'
 
+  get 'search', controller: :products, action: :search, as: :search_products
 
   resources :products, path: 'admin/products'
 
