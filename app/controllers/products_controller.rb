@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   def edit
   end
 
-  # GET /products/info?ids[]=3&ids[]=2
+  # GET /products/info?&ids[]=3&ids[]=2
   def info
     @products = Product.find(params[:ids])
     render json: @products

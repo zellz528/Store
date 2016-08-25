@@ -1,5 +1,46 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+
+var readCart = function() {
+  try {
+    var contents = JSON.parse(readCookie('cart'));
+    if (!contents) {
+      return {};
+    }
+    return contents;
+  }
+  catch(e) {
+    console.log(readCookie('cart'), e);
+    return {};
+  }
+};
+var removeFromCart = function(itemId) {
+  var contents = readCart();
+  delete contents[itemId];
+  createCookie('cart', JSON.stringify(contents), 60);
+  updateCart();
+};
+var addToCart = function(itemId) {
+  var contents = readCart();
+  if (contents[itemId]) {
+    contents[itemId]++;
+  }
+  else {
+    contents[itemId] = 1;
+  }
+  createCookie('cart', JSON.stringify(contents), 60);
+  updateCart();
+};
+var updateCart = function() {
+  var content = readCart();
+  var keys = Object.keys(content);
+  var count = 0;
+  for (var i = 0; i < keys.length; i++) {
+    count += content[keys[i]];
+  }
+  var cart = count + (count == 1 ? ' asi' : ' asja');
+  $('#cart').text('Sul on ostukorvis ' + cart);
+};
 var searchProducts = function() {
   var query = $('#product-search').val();
   $.get('/search?q=' + query, function(productList) {
@@ -12,6 +53,9 @@ var searchProducts = function() {
       var productRectangle  = $('<div class="col-md-4">');
       productRectangle.append('<h2>'+ productList[i].name +'</h2>');
       productRectangle.append('<p>'+ productList[i].description +'</p>');
+      var cartLink = $('<a href="#" class="add-to-cart btn btn-success btn-sm">Lisa ostukorvi</a>');
+      cartLink.data('product-id', productList[i].id);
+      productRectangle.append(cartLink);
       products.append(productRectangle);
     }
   });
@@ -27,6 +71,15 @@ var ready = function() {
     }
     searchTimeout = setTimeout(searchProducts, 150);
   });
+
+  $('#products').on('click', '.add-to-cart', function(e) {
+    e.preventDefault();
+    var link = $(this);
+    var id = link.data('product-id');
+    addToCart(id);
+  });
+
+  updateCart();
   searchProducts();
 };
 $(document).on('ready', ready);
