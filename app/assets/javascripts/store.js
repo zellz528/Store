@@ -39,7 +39,14 @@ var updateCart = function() {
     count += content[keys[i]];
   }
   var cart = count + (count == 1 ? ' asi' : ' asja');
-  $('#cart').text('Sul on ostukorvis ' + cart);
+//  var ostukorv = $('#cart').text('Sul on ostukorvis ' + cart);
+///products/info?&ids[]=3&ids[]=2
+  var ostukorv  = $('#cart');
+  var cartLink2 = $('<a href="products/info?ids[]=3" class="go-to-cart btn btn-sm">' +'Sul on ostukorvis '+ cart +  '</a>');
+   ostukorv.append(cartLink2);
+
+
+
 };
 var searchProducts = function() {
   var query = $('#product-search').val();
