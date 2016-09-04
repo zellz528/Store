@@ -16,6 +16,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.page-wrap {
+  padding-top: 60px;
+}
 #cart {
   color: #fff;
 }
