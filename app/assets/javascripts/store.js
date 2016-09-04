@@ -35,14 +35,20 @@ var updateCart = function() {
   var content = readCart();
   var keys = Object.keys(content);
   var count = 0;
+  var textList = [];
   for (var i = 0; i < keys.length; i++) {
     count += content[keys[i]];
+    var idText = '&ids[]=' + keys[i];
+    textList.push(idText);
   }
+
+
   var cart = count + (count == 1 ? ' asi' : ' asja');
 //  var ostukorv = $('#cart').text('Sul on ostukorvis ' + cart);
 ///products/info?&ids[]=3&ids[]=2
   var ostukorv  = $('#cart');
-  var cartLink2 = $('<a href="products/info?ids[]=3" class="go-to-cart btn btn-sm">' +'Sul on ostukorvis '+ cart +  '</a>');
+  ostukorv.empty();
+  var cartLink2 = $('<a href="products/info?' + textList +'" class="go-to-cart btn btn-sm">' +'Sul on ostukorvis '+ cart +  '</a>');
    ostukorv.append(cartLink2);
 
 
