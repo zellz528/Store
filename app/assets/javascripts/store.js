@@ -1,19 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-var readCart = function() {
-  try {
-    var contents = JSON.parse(readCookie('cart'));
-    if (!contents) {
-      return {};
-    }
-    return contents;
-  }
-  catch(e) {
-    console.log(readCookie('cart'), e);
-    return {};
-  }
-};
 var removeFromCart = function(itemId) {
   var contents = readCart();
   delete contents[itemId];
@@ -48,7 +35,7 @@ var updateCart = function() {
 ///products/info?&ids[]=3&ids[]=2
   var ostukorv  = $('#cart');
   ostukorv.empty();
-  var cartLink2 = $('<a href="products/info?' + textList +'" class="go-to-cart btn btn-sm">' +'Sul on ostukorvis '+ cart +  '</a>');
+  var cartLink2 = $('<a href="cart/list?' + textList +'" class="go-to-cart btn btn-sm">' +'Sul on ostukorvis '+ cart +  '</a>');
    ostukorv.append(cartLink2);
 
 

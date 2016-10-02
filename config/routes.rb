@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'store/index'
 
   root 'store#index'
-  get 'cart/show', controller: :cart, action: :show, as: :show_cart
+  get 'cart/list', controller: :cart, action: :list, as: :show_cart
 
   get 'search', controller: :products, action: :search, as: :search_products
   get 'products/info', controller: :products, action: :info, as: :products_info

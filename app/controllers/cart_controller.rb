@@ -5,7 +5,8 @@ class CartController < ApplicationController
   def create
   end
 
-  def show
+  def list
+    @products = Product.find(params[:ids])
 
   end
 end

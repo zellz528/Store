@@ -17,6 +17,19 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+var readCart = function() {
+  try {
+    var contents = JSON.parse(readCookie('cart'));
+    if (!contents) {
+      return {};
+    }
+    return contents;
+  }
+  catch(e) {
+    console.log(readCookie('cart'), e);
+    return {};
+  }
+};
 
 function createCookie(name,value,days) {
     if (days) {
